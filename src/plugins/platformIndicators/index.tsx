@@ -40,9 +40,15 @@ export interface Session {
 const SessionsStore = findStoreLazy("SessionsStore") as {
     getSessions(): Record<string, Session>;
 };
+
 const { useStatusFillColor } = mapMangledModuleLazy([".5625*", "translate"], {
     useStatusFillColor: filters.byCode(".hex")
 });
+
+const platformMap = {
+    embedded: "Console",
+    vr: "VR"
+};
 
 function Icon(path: string, opts?: { viewBox?: string; width?: number; height?: number; }) {
     return ({ color, tooltip, small }: { color: string; tooltip: string; small: boolean; }) => (
@@ -73,11 +79,7 @@ const Icons = {
 };
 
 const PlatformIcon = ({ platform, status, small }) => {
-    const tooltip = platform === "embedded"
-        ? "Console"
-        : platform === "vr"
-            ? "VR"
-            : platform[0].toUpperCase() + platform.slice(1);
+    const tooltip = platformMap[platform] ?? platform.charAt(0).toUpperCase() + platform.slice(1);
     let Icon = Icons[platform] ?? Icons.desktop;
     const { ConsoleIcon } = settings.store;
     if (platform === "embedded") {
