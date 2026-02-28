@@ -19,8 +19,7 @@
 import "./style.css";
 
 import { definePluginSettings, migratePluginSetting } from "@api/Settings";
-import { Devs } from "@utils/constants";
-import { EquicordDevs } from "@utils/constants";
+import { Devs, EquicordDevs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { DiscordPlatform, User } from "@vencord/discord-types";
@@ -219,6 +218,7 @@ export default definePlugin({
     name: "PlatformIndicators",
     description: "Adds platform indicators (Desktop, Mobile, Web...) to users",
     authors: [Devs.kemo, Devs.TheSun, Devs.Nuckyz, Devs.Ven, EquicordDevs.neoarz],
+    isModified: true,
     settings,
     renderNicknameIcon(props) {
         if (!settings.store.profiles) return null;
